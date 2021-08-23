@@ -25,7 +25,7 @@ if ip is not None:
     except socket.gaierror:
         print("No host defined!")
         sys.exit()
-    except socket.timeout:  #Never occurs because we defined a timeout
+    except socket.timeout:  # Never occurs because we defined a timeout
         print("Timeout Error")
         sys.exit()
     except socket.error:
