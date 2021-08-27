@@ -31,3 +31,6 @@ if ip is not None:
     except socket.error:
         print("No server response!")
         sys.exit()
+
+if __name__ == "__main__":
+	main()
