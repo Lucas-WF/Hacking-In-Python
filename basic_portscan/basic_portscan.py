@@ -1,18 +1,34 @@
 import pyfiglet
 import sys
 import socket
+import subprocess
 
-ascii_banner = pyfiglet.figlet_format("PY PORTSCAN")
-print(ascii_banner)  # Printing the banner
+subprocess.call("clear", shell=True)
 
-ip = socket.gethostbyname(sys.argv[1]) if len(sys.argv) > 1 else print(66 * "*" + "\nTYPE THE IP!! Exiting..\n" + 66 * "*") and sys.exit()  # If the first arg is not defined
+if sys.platform.startswith("linux"):
+    red_color = "\033[1;31m"
+    reset_color = "\033[0;0m"
+    ascii_banner = pyfiglet.figlet_format("PY PORTSCAN")
+    print(red_color + ascii_banner + reset_color)  # Printing the banner with colors
+else:
+    ascii_banner = pyfiglet.figlet_format("PY PORTSCAN")
+    print(ascii_banner)  # Printing the banner without colors
 
-if ip is not None:
-    print(66 * "*")
-    print("SCANNING HOST: " + str(ip))  # Showing the Scan process
-    print(66 * "*")
+
+if len(sys.argv) > 1:
+    ip = socket.gethostbyname(sys.argv[1])
+else:
+    print(66 * "*" + "\nTYPE THE IP!! Exiting..\n" + 66 * "*")
+    sys.exit()  # If the first arg is not defined
+
+print(66 * "*")
+print("SCANNING HOST: " + str(ip))  # Showing the Scan process
+print(66 * "*")
+
+
+def scanport(low_port=1, high_port=1000):
     try:  # To cover errors or not
-        for ports in range(1, 65535):  # For all ports
+        for ports in range(low_port, high_port):  # For all ports
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # Creating a socket
             socket.setdefaulttimeout(1)  # Setting a timeout
             if s.connect_ex((ip, ports)) == 0:  # If the ports are open
@@ -20,7 +36,7 @@ if ip is not None:
             s.close()
 
     except KeyboardInterrupt:
-        print("\nExiting!!")
+        print("\n\nExiting!!")
         sys.exit()
     except socket.gaierror:
         print("No host defined!")
@@ -32,5 +48,9 @@ if ip is not None:
         print("No server response!")
         sys.exit()
 
+
+scanport()
+
 if __name__ == "__main__":
 	main()
+
