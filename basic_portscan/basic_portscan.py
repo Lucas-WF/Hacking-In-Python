@@ -10,7 +10,7 @@ if sys.platform.startswith("linux"):
     red_color = "\033[1;31m"
     reset_color = "\033[0;0m"
     ascii_banner = pyfiglet.figlet_format("PY PORTSCAN")
-    print(red_color + ascii_banner + reset_color)  # Printing the banner with colors
+    print(red_color + ascii_banner + reset_color)  # Printing the banner with colors (for Linux)
 else:
     ascii_banner = pyfiglet.figlet_format("PY PORTSCAN")
     print(ascii_banner)  # Printing the banner without colors
@@ -42,16 +42,15 @@ def scanport(low_port=1, high_port=1000):
     except socket.gaierror:
         print("No host defined!")
         sys.exit()
-    except socket.timeout:  # Never occurs because we defined a timeout
+    except socket.timeout:  # Never occurs because we defined a timeout. But if you want do del the timeout
         print("Timeout Error")
         sys.exit()
     except socket.error:
         print("No server response!")
         sys.exit()
 
+if args.min_port < args.max_port:  # If the low port is < max port
+    scanport(args.min_port, args.max_port)
+    print("\nFinished!!")
 
-scanport(args.p, args.pe)
-
-if __name__ == "__main__":
-	main()
-
+print("\nExiting...")
