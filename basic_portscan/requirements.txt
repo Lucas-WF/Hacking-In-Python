@@ -1,10 +1,9 @@
-Python == Python3
+Python3.
 pip
+pyfiglet
 
-////////////////////////////////////////////////
-
+/*
 To install the pyfiglet lib:
-pip install py
-
-////////////////////////////////////////////////
+pip install pyfiglet
+*/
 
