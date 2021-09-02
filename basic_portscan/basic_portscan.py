@@ -2,6 +2,7 @@ import pyfiglet
 import sys
 import socket
 import subprocess
+from flags import args
 
 subprocess.call("clear", shell=True)
 
@@ -49,7 +50,7 @@ def scanport(low_port=1, high_port=1000):
         sys.exit()
 
 
-scanport()
+scanport(args.p, args.pe)
 
 if __name__ == "__main__":
 	main()
