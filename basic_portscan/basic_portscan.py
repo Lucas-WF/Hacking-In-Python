@@ -4,7 +4,12 @@ import socket
 import subprocess
 from flags import args, parser
 
-if len(sys.argv) > 1 and sys.argv[1] == '-h':
+if len(sys.argv) > 1 and sys.argv[1] == '-h' or len(sys.argv) > 1 and sys.argv[1] == "--help":
+    parser.print_help()
+    sys.exit()
+elif len(sys.argv) > 1:
+    ip = socket.gethostbyname(sys.argv[1])
+else:
     parser.print_help()
     sys.exit()
 
@@ -19,12 +24,6 @@ else:
     ascii_banner = pyfiglet.figlet_format("PY PORTSCAN")
     print(ascii_banner)  # Printing the banner without colors
 
-
-if len(sys.argv) > 1:
-    ip = socket.gethostbyname(sys.argv[1])
-else:
-    print(66 * "*" + "\nTYPE THE IP!! Exiting..\n" + 66 * "*")
-    sys.exit()  # If the first arg is not defined
 
 print(66 * "*")
 print("SCANNING HOST: " + str(ip))  # Showing the Scan process
