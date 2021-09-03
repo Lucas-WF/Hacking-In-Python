@@ -4,13 +4,13 @@ import socket
 import subprocess
 from flags import args, parser
 
-if len(sys.argv) > 1 and sys.argv[1] == '-h' or len(sys.argv) > 1 and sys.argv[1] == "--help":
-    parser.print_help()
+if len(sys.argv) > 1 and sys.argv[1] == '-h' or len(sys.argv) > 1 and sys.argv[1] == "--help":  # If the args is a flag 
+    parser.print_help()  # Printing the flags help
     sys.exit()
-elif len(sys.argv) > 1:
+elif len(sys.argv) > 1:  # If the args is the IP
     ip = socket.gethostbyname(sys.argv[1])
-else:
-    parser.print_help()
+else:  # If no args
+    parser.print_help()  # Printing the flags help
     sys.exit()
 
 subprocess.call("clear", shell=True)
