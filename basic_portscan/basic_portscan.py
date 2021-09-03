@@ -2,7 +2,11 @@ import pyfiglet
 import sys
 import socket
 import subprocess
-from flags import args
+from flags import args, parser
+
+if len(sys.argv) > 1 and sys.argv[1] == '-h':
+    parser.print_help()
+    sys.exit()
 
 subprocess.call("clear", shell=True)
 
