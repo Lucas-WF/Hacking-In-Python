@@ -2,6 +2,7 @@ import pyfiglet
 import sys
 import socket
 import subprocess
+from datetime import datetime
 from flags import args, parser
 
 if len(sys.argv) > 1 and sys.argv[1] == '-h' or len(sys.argv) > 1 and sys.argv[1] == "--help":  # If the args is a flag 
@@ -24,9 +25,10 @@ else:
     ascii_banner = pyfiglet.figlet_format("PY PORTSCAN")
     print(ascii_banner)  # Printing the banner without colors
 
-
+ft = datetime.now()
 print(66 * "*")
-print("SCANNING HOST: " + str(ip))  # Showing the Scan process
+print(f"SCANNING HOST: {ip}")  # Showing the Scan process
+print(f"Started in {ft}")
 print(66 * "*")
 
 
@@ -52,8 +54,10 @@ def scanport(low_port=1, high_port=1000):
         print("No server response!")
         sys.exit()
 
-if args.min_port < args.max_port:  # If the low port is < max port
+if args.min_port <= args.max_port:  # If the low port is < max port
     scanport(args.min_port, args.max_port)
-    print("\nFinished!!")
+
+et = datetime.now()
+print(f"\nFinished in {et}")
 
 print("\nExiting...")
