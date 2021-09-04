@@ -14,7 +14,10 @@ else:  # If no args
     parser.print_help()  # Printing the flags help
     sys.exit()
 
-subprocess.call("clear", shell=True)
+if sys.platform.startswith("linux"):  # Cleaning the linux terminal
+    subprocess.call("clear", shell=True)
+else:  # Cleaning the macOS and Windows terminal
+    subprocess.call("cls", shell=True)
 
 if sys.platform.startswith("linux"):
     red_color = "\033[1;31m"
